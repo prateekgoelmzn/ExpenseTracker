@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
+    <title>Expense Tracker | SignUp</title>
+</head>
+<body>
+<div th:replace="header :: header"></div>
+
+<div class="container">
+    <div class="alert alert-danger" th:if="${param.exist}">Username exists please use different username or signin.
+    </div>
+    <form action="#" method="post" th:action="@{/save}" th:object="${user}">
+        <div class="mb-3">
+            <label class="form-label" for="exampleInputName">User Name</label>
+            <input aria-describedby="nameHelp" class="form-control" id="exampleInputName" th:field="*{name}"
+                   type="text">
+            <div class="form-text" id="nameHelp">We'll never share your information with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="exampleInputPassword1">Password</label>
+            <input class="form-control" id="exampleInputPassword1" th:field="*{password}" type="password">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Select Role</label>
+            <select aria-label="select role" class="form-select" th:field="*{role}">
+                <option th:each="r : ${roles}" th:text="${r}" th:value="${r}"/>
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+
+<script crossorigin="anonymous"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

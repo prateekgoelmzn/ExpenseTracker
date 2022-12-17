@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
+    <title>Expense Tracker | Monthly Expense</title>
+</head>
+<body>
+<div th:replace="header :: header"></div>
+
+<div class="container">
+    <form action="#" method="get" th:action="@{/expense/monthly}" class="row gx-3 gy-2 align-items-center">
+        <div class="col-sm-3">
+            <label for="specificMonthSelect">Month</label>
+            <select class="form-select" id="specificMonthSelect" name="month">
+                <option selected>Choose...</option>
+                <option th:each="month : ${monthList}" th:text="${month.getSecond()}" th:value="${month.getFirst()}"/>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <label for="specificInputYear">Year</label>
+            <input type="text" class="form-control" id="specificInputYear" placeholder="Type Year.." name="year">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+<br/>
+<div class="container">
+    <div th:if="${ not#lists.isEmpty(monthExpenseList)}">
+        <div class="alert alert-success" th:if="${monthExpense ne null}">
+            Total expenses for month <span th:text="${monthExpense.getMonthName()}"></span> and year <span
+                th:text="${monthExpense.getYear()}"></span> is <b><span th:text="${monthExpense.getTotal()}"></span></b>
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+                <th scope="col">Category</th>
+            </tr>
+            <tr th:each="e : ${monthExpenseList}">
+                <td th:text="${e.amount}"></td>
+                <td th:text="${e.date}"></td>
+                <td th:text="${e.category}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="${monthExpense ne null}">
+        <div class="alert alert-danger" th:if="${ #lists.isEmpty(monthExpenseList)}">
+            No record found
+        </div>
+    </div>
+</div>
+
+<script crossorigin="anonymous"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
